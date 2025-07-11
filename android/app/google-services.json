@@ -1,0 +1,124 @@
+{
+  "project_info": {
+    "project_number": "266075240568",
+    "project_id": "aplikasi-388e7",
+    "storage_bucket": "aplikasi-388e7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266075240568:android:6e6a12c2bbe42b2d7ed58d",
+        "android_client_info": {
+          "package_name": "com.app.bons"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgyEzVCxBrfpjPrkYCu-VCXKpTjk3SaJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266075240568:android:b602de25e242a3b57ed58d",
+        "android_client_info": {
+          "package_name": "com.app.bonsbisnis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgyEzVCxBrfpjPrkYCu-VCXKpTjk3SaJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266075240568:android:e4ca80af5019afe87ed58d",
+        "android_client_info": {
+          "package_name": "com.app.bonskurir"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgyEzVCxBrfpjPrkYCu-VCXKpTjk3SaJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266075240568:android:309a70c5cb2d4f947ed58d",
+        "android_client_info": {
+          "package_name": "com.durzaam.dakservice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgyEzVCxBrfpjPrkYCu-VCXKpTjk3SaJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266075240568:android:3ea07e6a00d014037ed58d",
+        "android_client_info": {
+          "package_name": "com.haloauto.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgyEzVCxBrfpjPrkYCu-VCXKpTjk3SaJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266075240568:android:66473c98a3623c6e7ed58d",
+        "android_client_info": {
+          "package_name": "com.konterin.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgyEzVCxBrfpjPrkYCu-VCXKpTjk3SaJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
