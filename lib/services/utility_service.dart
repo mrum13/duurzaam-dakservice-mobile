@@ -30,23 +30,23 @@ class UtilityService {
   }
 
   // Launch external URL
-  static Future<void> launchURL(String url) async {
+  static Future<void> launchURL(String codeType, String url) async {
     try {
-      final Uri uri = Uri.parse(url);
+      final Uri uri = Uri.parse(codeType);
 
       // Special handling for phone numbers
-      if (url.startsWith('tel:')) {
-        await _launchPhoneNumber(url);
+      if (codeType.startsWith('tel:')) {
+        await _makePhoneCall(url);
         return;
       }
 
-      if (url.startsWith('mailto:')) {
+      if (codeType.startsWith('mailto:')) {
         await _launchEmail(url); 
         return;
       }
 
       // Special handling for WhatsApp
-      if (url.contains('wa.me') || url.contains('whatsapp')) {
+      if (codeType.contains('wa.me') || codeType.contains('whatsapp')) {
         await _launchWhatsApp(url);
         return;
       }
@@ -64,15 +64,12 @@ class UtilityService {
   }
 
   // Launch phone number
-  static Future<void> _launchPhoneNumber(String phoneUrl) async {
-    try {
-      final Uri uri = Uri.parse(phoneUrl);
-      if (await canLaunchUrl(uri)) {
-        await launchUrl(uri);
-      }
-    } catch (e) {
-      print('Error launching phone: $e');
-    }
+  static Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
   }
 
   static Future<void> _launchEmail(String mailtoUrl) async {

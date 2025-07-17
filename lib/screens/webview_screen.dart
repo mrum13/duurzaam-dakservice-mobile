@@ -55,7 +55,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
           onNavigationRequest: (NavigationRequest request) {
             // Handle external links
             if (UtilityService.shouldOpenExternally(request.url)) {
-              UtilityService.launchURL(request.url);
+              // UtilityService.launchURL(request.url);
               return NavigationDecision.prevent;
             }
             return NavigationDecision.navigate;

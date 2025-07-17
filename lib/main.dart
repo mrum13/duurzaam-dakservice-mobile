@@ -1,4 +1,5 @@
 import 'package:duurzaam_dakservice/cubit/navbar_cubit.dart';
+import 'package:duurzaam_dakservice/screens/detail_service_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -72,6 +73,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Duurzaam Dakservice',
         home: const SplashScreen(),
+        routes: {
+          '/detailService': (context) => DetailServicePage(), // Tambahkan ini
+          // Tambahkan route lain jika perlu
+        },
         builder: (context, child) {
           SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
             statusBarColor: Colors.blueAccent,

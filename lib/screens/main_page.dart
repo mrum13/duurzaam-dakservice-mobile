@@ -3,6 +3,7 @@ import 'package:duurzaam_dakservice/cubit/navbar_cubit.dart';
 import 'package:duurzaam_dakservice/screens/booking_page.dart';
 import 'package:duurzaam_dakservice/screens/contact_page.dart';
 import 'package:duurzaam_dakservice/screens/home_page.dart';
+import 'package:duurzaam_dakservice/screens/offline_page.dart';
 import 'package:duurzaam_dakservice/screens/services_page.dart';
 import 'package:duurzaam_dakservice/screens/webview_screen.dart';
 import 'package:duurzaam_dakservice/widgets/custom_button_navigation_item.dart';
@@ -21,9 +22,9 @@ class MainPage extends StatelessWidget {
         case 1:
           return ServicesPage();
         case 2:
-          return ContactPage();
-        case 3:
           return BookingPage();
+        case 3:
+          return ContactPage();
         case 4:
           return WebViewScreen();
         default:
@@ -54,16 +55,16 @@ class MainPage extends StatelessWidget {
                 ),
                 CustomButtonNavigationItem(
                   index: 2,
-                  icon: Icons.call,
-                ),
-                CustomButtonNavigationItem(
-                  index: 3,
                   icon: Icons.book,
                 ),
                 CustomButtonNavigationItem(
-                  index: 4,
-                  icon: Icons.web,
+                  index: 3,
+                  icon: Icons.call,
                 ),
+                // CustomButtonNavigationItem(
+                //   index: 4,
+                //   icon: Icons.web,
+                // ),
               ],
             ),
           ));
@@ -72,6 +73,7 @@ class MainPage extends StatelessWidget {
     return BlocBuilder<NavbarCubit, int>(
       builder: (context, currentIndex) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: AppColors.grayColor,
           body: Stack(
             children: [
