@@ -1,3 +1,4 @@
+import 'package:duurzaam_dakservice/screens/main_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'webview_screen.dart';
@@ -45,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen>
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const WebViewScreen()),
+        MaterialPageRoute(builder: (context) => const MainPage()),
       );
     });
   }

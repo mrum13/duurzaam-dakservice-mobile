@@ -1,5 +1,7 @@
+import 'package:duurzaam_dakservice/cubit/navbar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'screens/splash_screen.dart';
 import 'services/notification_service.dart';
@@ -61,20 +63,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print('🏗️ Building MyApp widget...');
-    return MaterialApp(
-      title: 'Duurzaam Dakservice',
-      home: const SplashScreen(),
-      builder: (context, child) {
-        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-          statusBarColor: Colors.blueAccent,
-          statusBarIconBrightness: Brightness.light,
-          statusBarBrightness: Brightness.dark,
-          systemNavigationBarColor: Colors.white,
-          systemNavigationBarIconBrightness: Brightness.dark,
-        ));
-        return child!;
-      },
-      debugShowCheckedModeBanner: false,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NavbarCubit(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Duurzaam Dakservice',
+        home: const SplashScreen(),
+        builder: (context, child) {
+          SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+            statusBarColor: Colors.blueAccent,
+            statusBarIconBrightness: Brightness.light,
+            statusBarBrightness: Brightness.dark,
+            systemNavigationBarColor: Colors.white,
+            systemNavigationBarIconBrightness: Brightness.dark,
+          ));
+          return child!;
+        },
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
