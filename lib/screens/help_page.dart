@@ -48,15 +48,14 @@ class HelpPage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 8),
-                      Expanded(
-                        child: Image.asset(
-                          "assets/images/step1_2.png",
-                          height: 200,
-                        ),
-                      ),
+                          Expanded(
+                            child: Image.asset(
+                              "assets/images/step1_2.png",
+                              height: 200,
+                            ),
+                          ),
                         ],
                       ),
-                      
                       const SizedBox(height: 8),
                       Center(
                         child: Image.asset(
@@ -92,7 +91,6 @@ class HelpPage extends StatelessWidget {
                           width: 200,
                         ),
                       ),
-                      
                       const SizedBox(height: 8),
                       Center(
                         child: Image.asset(
@@ -126,7 +124,6 @@ class HelpPage extends StatelessWidget {
                           width: 200,
                         ),
                       ),
-                      
                       const SizedBox(height: 8),
                       Center(
                         child: Image.asset(
