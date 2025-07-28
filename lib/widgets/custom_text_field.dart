@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String hintText;
   final IconData? prefixIcon;
-  const CustomTextField({super.key, required this.hintText, this.prefixIcon});
+  final TextEditingController controller;
+  const CustomTextField({super.key, required this.controller, required this.hintText, this.prefixIcon});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       enabled: true,
       cursorHeight: 14,
       cursorColor: AppColors.darkBlueColor,

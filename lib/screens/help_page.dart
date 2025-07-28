@@ -24,6 +24,7 @@ class HelpPage extends StatelessWidget {
               // shrinkExtent: 10,
               children: [
                 Container(
+                  width: MediaQuery.sizeOf(context).width - 32,
                   decoration: BoxDecoration(
                     color: AppColors.whiteColor,
                     borderRadius: BorderRadius.circular(12),
@@ -65,12 +66,27 @@ class HelpPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 16),
-                      Text("Description for help item 1",
-                          style: TextStyle(color: Colors.white70)),
+                      Text(
+                        "1. Pilih jenis kendala",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: AppColors.blackColor)
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        "2. Isi keterangan kendala",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: AppColors.blackColor)
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
                     ],
                   ),
                 ),
                 Container(
+                  width: MediaQuery.sizeOf(context).width - 32,
                   decoration: BoxDecoration(
                     color: AppColors.whiteColor,
                     borderRadius: BorderRadius.circular(12),
@@ -95,15 +111,30 @@ class HelpPage extends StatelessWidget {
                       Center(
                         child: Image.asset(
                           "assets/images/step2_2.png",
-                          height: 200,
-                          width: 200,
+                          height: 300,
+                          width: 300,
+                          fit: BoxFit.contain,
                         ),
                       ),
                       SizedBox(height: 16),
+                      Text(
+                        "3. Masukan foto kendala",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: AppColors.blackColor)
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        "4. Bisa melalui kamera atau galeri",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: AppColors.blackColor)
+                      ),
                     ],
                   ),
                 ),
                 Container(
+                  width: MediaQuery.sizeOf(context).width - 32,
                   decoration: BoxDecoration(
                     color: AppColors.whiteColor,
                     borderRadius: BorderRadius.circular(12),
@@ -120,23 +151,29 @@ class HelpPage extends StatelessWidget {
                       Center(
                         child: Image.asset(
                           "assets/images/step3_1.png",
-                          height: 200,
-                          width: 200,
+                          height: 250,
+                          width: 250,
                         ),
                       ),
                       const SizedBox(height: 8),
                       Center(
                         child: Image.asset(
                           "assets/images/step3_2.png",
-                          height: 200,
-                          width: 200,
+                          height: 300,
+                          width: 300,
                         ),
                       ),
                       SizedBox(height: 16),
+                      Text(
+                        "5. Pilih lokasi kerusakan terbesar",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: AppColors.blackColor)
+                      ),
                     ],
                   ),
                 ),
                 Container(
+                  width: MediaQuery.sizeOf(context).width - 32,
                   decoration: BoxDecoration(
                     color: AppColors.whiteColor,
                     borderRadius: BorderRadius.circular(12),
@@ -156,6 +193,11 @@ class HelpPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 16),
+                      Text(
+                        "6. Lengkapi data diri",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: AppColors.blackColor)
+                      ),
                     ],
                   ),
                 ),

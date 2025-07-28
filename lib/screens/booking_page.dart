@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:duurzaam_dakservice/common/app_colors.dart';
 import 'package:duurzaam_dakservice/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,17 @@ class BookingPage extends StatefulWidget {
 }
 
 class _BookingPageState extends State<BookingPage> {
+  final TextEditingController _problemController = TextEditingController();
+
+  final TextEditingController _naanController = TextEditingController();
+  final TextEditingController _woonplaatsController = TextEditingController();
+  final TextEditingController _telefoonnummerController =
+      TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+
+  bool isFilled = false;
+  bool isLaoading = false;
+
   final ImagePicker _picker = ImagePicker();
   final List<String> _optionsProbleem = [
     'Lekkage',
@@ -19,12 +32,86 @@ class _BookingPageState extends State<BookingPage> {
     'overig',
   ];
   String? _selectedOptionProbleem;
-  final List<String> _optionsSchade = [
-    'Binnen', 
-    'Buiten', 
-    'onbekend'
-  ];
+  final List<String> _optionsSchade = ['Binnen', 'Buiten', 'onbekend'];
   String? _selectedOptionSchade;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _problemController.addListener(_validateFields);
+    _naanController.addListener(_validateFields);
+    _woonplaatsController.addListener(_validateFields);
+    _telefoonnummerController.addListener(_validateFields);
+    _emailController.addListener(_validateFields);
+  }
+
+  void _validateFields() {
+    setState(() {
+      isFilled = _problemController.text.isNotEmpty &&
+          _naanController.text.isNotEmpty &&
+          _woonplaatsController.text.isNotEmpty &&
+          _telefoonnummerController.text.isNotEmpty &&
+          _emailController.text.isNotEmpty;
+    });
+  }
+
+  void _submitForm() async {
+    Random random = Random(); // Create a Random object
+    int randomNumber = random.nextInt(
+        5); // Generates a random integer between 0 (inclusive) and 100 (exclusive)
+
+    setState(() {
+      isLaoading = true;
+    });
+
+    await Future.delayed(Duration(seconds: randomNumber)).then(
+      (value) {
+        setState(() {
+          isLaoading = false;
+        });
+
+        showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (context) {
+            // Mulai timer 3 detik setelah dialog muncul
+            Future.delayed(Duration(seconds: 3), () {
+              Navigator.of(context).pop(); // Tutup dialog
+            });
+            return Dialog(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 56),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.check_circle,
+                      color: AppColors.green2Color,
+                      size: 72,
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Text(
+                      "Succes",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Text("Bestelling succesvol aangemaakt"),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,7 +190,9 @@ class _BookingPageState extends State<BookingPage> {
                         height: 8,
                       ),
                       CustomTextField(
-                          hintText: "Uitleg probleem", prefixIcon: Icons.edit),
+                          controller: _problemController,
+                          hintText: "Uitleg probleem",
+                          prefixIcon: Icons.edit),
                       const SizedBox(
                         height: 8,
                       ),
@@ -245,48 +334,63 @@ class _BookingPageState extends State<BookingPage> {
                         height: 8,
                       ),
                       CustomTextField(
-                          hintText: "Naam", prefixIcon: Icons.person),
+                          controller: _naanController,
+                          hintText: "Naam",
+                          prefixIcon: Icons.person),
                       const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
-                          hintText: "Woonplaats", prefixIcon: Icons.domain),
+                          controller: _woonplaatsController,
+                          hintText: "Woonplaats",
+                          prefixIcon: Icons.domain),
                       const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
-                          hintText: "Telefoonnummer", prefixIcon: Icons.call),
+                          controller: _telefoonnummerController,
+                          hintText: "Telefoonnummer",
+                          prefixIcon: Icons.call),
                       const SizedBox(
                         height: 8,
                       ),
                       CustomTextField(
-                          hintText: "E-mailadres", prefixIcon: Icons.email),
+                          controller: _emailController,
+                          hintText: "E-mailadres",
+                          prefixIcon: Icons.email),
                       const SizedBox(
                         height: 12,
                       ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.yellowColor,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Contact opnemen",
-                              style: TextStyle(
-                                  color: AppColors.blackColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600),
+                      isLaoading
+                          ? Center(
+                              child: const CircularProgressIndicator(
+                              color: AppColors.yellowColor,
+                            ))
+                          : ElevatedButton(
+                              onPressed: isFilled ? _submitForm : null,
+                              style: ElevatedButton.styleFrom(
+                                disabledBackgroundColor:
+                                    const Color.fromARGB(255, 244, 231, 173),
+                                backgroundColor: AppColors.yellowColor,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 24, vertical: 12),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Contact opnemen",
+                                    style: TextStyle(
+                                        color: AppColors.blackColor,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
                     ],
                   ),
                 ),
