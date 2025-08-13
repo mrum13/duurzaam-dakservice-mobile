@@ -74,31 +74,6 @@ class ContactPage extends StatelessWidget {
                                         minimumSize: Size(double.infinity, 44),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {UtilityService.launchURL('wa.me','0851307292');},
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(Icons.chat),
-                                          const SizedBox(width: 8),
-                                          Text("WhatsApp"),
-                                        ],
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: AppColors.whiteColor,
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 24, vertical: 12),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(24),
-                                        ),
-                                        minimumSize: Size(double.infinity, 44),
-                                      ),
-                                    ),
                                     const SizedBox(height: 12),
                                     // Add your image upload widget here
                                   ],

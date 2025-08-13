@@ -5,7 +5,8 @@ class CustomTextField extends StatelessWidget {
   final String hintText;
   final IconData? prefixIcon;
   final TextEditingController controller;
-  const CustomTextField({super.key, required this.controller, required this.hintText, this.prefixIcon});
+  final int maxLines;
+  const CustomTextField({super.key, required this.controller, required this.hintText, this.prefixIcon, this.maxLines = 1});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class CustomTextField extends StatelessWidget {
       enabled: true,
       cursorHeight: 14,
       cursorColor: AppColors.darkBlueColor,
+      maxLines: maxLines,
       decoration: InputDecoration(
           fillColor: AppColors.whiteColor,
           filled: true,
@@ -36,8 +38,8 @@ class CustomTextField extends StatelessWidget {
             borderSide: BorderSide(color: AppColors.darkBlueColor, width: 1.0),
           ),
           prefixIcon: Padding(
-            padding: const EdgeInsetsDirectional.only(
-                start: 16, top: 12, bottom: 12, end: 10),
+            padding: EdgeInsetsDirectional.only(
+                start: 16, top: 12, bottom: maxLines>1?85:12, end: 10),
             child: Icon(
               prefixIcon,
               size: 20,

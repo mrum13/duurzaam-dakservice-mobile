@@ -1,6 +1,9 @@
 import 'package:duurzaam_dakservice/common/app_colors.dart';
+import 'package:duurzaam_dakservice/cubit/navbar_cubit.dart';
+import 'package:duurzaam_dakservice/services/utility_service.dart';
 import 'package:duurzaam_dakservice/widgets/card_content_dark_blue.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -177,7 +180,7 @@ class HomePage extends StatelessWidget {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                // Navigator.pushNamed(context, '/contact');
+                                context.read<NavbarCubit>().setPage(2);
                               },
                               style: ElevatedButton.styleFrom(
                                 minimumSize: const Size(double.infinity, 40),
@@ -196,30 +199,39 @@ class HomePage extends StatelessWidget {
                             const SizedBox(
                               height: 18,
                             ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.call,
-                                  color: AppColors.whiteColor,
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Text(
-                                  "Bel Robert: ",
-                                  style: TextStyle(
-                                    color: AppColors.whiteColor,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Text(
-                                  "085 130 7292",
-                                  style: TextStyle(
+                            InkWell(
+                              onTap: () {
+                                UtilityService.launchURL('tel:','0851307292');
+                              },
+                              child: Container(
+                                
+                                color: Colors.transparent,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.call,
                                       color: AppColors.whiteColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    Text(
+                                      "Bel Robert: ",
+                                      style: TextStyle(
+                                        color: AppColors.whiteColor,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    Text(
+                                      "085 130 7292",
+                                      style: TextStyle(
+                                          color: AppColors.whiteColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                             const SizedBox(
                               height: 18,
@@ -311,6 +323,7 @@ class HomePage extends StatelessWidget {
                                   ElevatedButton(
                                     onPressed: () {
                                       // Navigator.pushNamed(context, '/contact');
+                                      context.read<NavbarCubit>().setPage(2);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       minimumSize:

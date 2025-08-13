@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:duurzaam_dakservice/common/app_colors.dart';
@@ -25,6 +26,7 @@ class _BookingPageState extends State<BookingPage> {
   bool isLaoading = false;
 
   final ImagePicker _picker = ImagePicker();
+  XFile? _imageFile;
   final List<String> _optionsProbleem = [
     'Lekkage',
     'stormschade',
@@ -95,13 +97,14 @@ class _BookingPageState extends State<BookingPage> {
                       height: 24,
                     ),
                     Text(
-                      "Succes",
+                      "Gelukt!",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 8,
                     ),
-                    Text("Bestelling succesvol aangemaakt"),
+                    Text(
+                        "We nemen zo snel mogelijk contact met u op voor een afspraak", textAlign: TextAlign.center,),
                   ],
                 ),
               ),
@@ -143,7 +146,7 @@ class _BookingPageState extends State<BookingPage> {
                         height: 8,
                       ),
                       Text(
-                        "Heeft u vragen en/of opmerkingen? Neem vrijblijvend contact op met onze dakdekkers, we helpen u graag!",
+                        "Vul het formulier in en wij nemen binnen 1 dag contact met u op:",
                         style: TextStyle(
                             color: AppColors.whiteColor,
                             fontSize: 14,
@@ -190,9 +193,11 @@ class _BookingPageState extends State<BookingPage> {
                         height: 8,
                       ),
                       CustomTextField(
-                          controller: _problemController,
-                          hintText: "Uitleg probleem",
-                          prefixIcon: Icons.edit),
+                        controller: _problemController,
+                        hintText: "Uitleg probleem",
+                        prefixIcon: Icons.edit,
+                        maxLines: 4,
+                      ),
                       const SizedBox(
                         height: 8,
                       ),
@@ -257,6 +262,38 @@ class _BookingPageState extends State<BookingPage> {
                                         minimumSize: Size(double.infinity, 44),
                                       ),
                                     ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    _imageFile!=null
+                                    ? ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        setState(() {
+                                          _imageFile = null;
+                                        });
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.delete),
+                                          const SizedBox(width: 8),
+                                          Text("Afbeelding verwijderen"),
+                                        ],
+                                      ),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: AppColors.whiteColor,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 24, vertical: 12),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(24),
+                                        ),
+                                        minimumSize: Size(double.infinity, 44),
+                                      ),
+                                    )
+                                    : const SizedBox(),
                                     const SizedBox(height: 12),
                                     // Add your image upload widget here
                                   ],
@@ -265,32 +302,50 @@ class _BookingPageState extends State<BookingPage> {
                             },
                           );
                         },
-                        child: Container(
-                          width: double.infinity,
-                          height: 44,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 8),
-                          decoration: BoxDecoration(
-                              color: AppColors.whiteColor,
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.image,
-                                  color: AppColors.darkBlueColor,
+                        child: Center(
+                          child: _imageFile != null
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Image.file(
+                                    File(_imageFile!.path),
+                                    fit: BoxFit.cover,
+                                    height: 150,
+                                    width: 150,
+                                  ),
+                                )
+                              : Container(
+                                  width: 150,
+                                  height: 150,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 8),
+                                  decoration: BoxDecoration(
+                                      color: AppColors.whiteColor,
+                                      borderRadius: BorderRadius.circular(12)),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          Icons.add_a_photo_outlined,
+                                          size: 64,
+                                          color: AppColors.darkBlueColor,
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Text(
+                                          "Probeer het probleem in beeld te brengen",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              color: AppColors.grayColor,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ]),
                                 ),
-                                const SizedBox(
-                                  width: 14,
-                                ),
-                                Text(
-                                  "Probeer het probleem in beeld te brengen",
-                                  style: TextStyle(
-                                      color: AppColors.grayColor,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ]),
                         ),
                       ),
                       const SizedBox(
@@ -394,6 +449,9 @@ class _BookingPageState extends State<BookingPage> {
                     ],
                   ),
                 ),
+                const SizedBox(
+                  height: 56,
+                )
               ],
             ),
           ),
@@ -403,18 +461,62 @@ class _BookingPageState extends State<BookingPage> {
   }
 
   Future<void> _pickFromCamera(BuildContext context) async {
-    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+    final XFile? photo =
+        await _picker.pickImage(source: ImageSource.camera, imageQuality: 80);
     if (photo != null) {
-      // Lakukan sesuatu dengan file photo
-      print('Picked from camera: ${photo.path}');
+      final File file = File(photo.path);
+      final int fileSize = await file.length();
+      final double fileSizeMB = fileSize / (1024 * 1024);
+
+      if (fileSizeMB > 2.0) {
+        if (!context.mounted) return;
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'De afbeelding is groter dan 2 MB. Selecteer een andere afbeelding.',
+            ),
+          ),
+        );
+        return;
+      }
+
+      Navigator.pop(context);
+
+      setState(() {
+        _imageFile = photo;
+      });
+      ;
     }
   }
 
   Future<void> _pickFromGallery(BuildContext context) async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? image =
+        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
     if (image != null) {
-      // Lakukan sesuatu dengan file image
-      print('Picked from gallery: ${image.path}');
+      final File file = File(image.path);
+      final int fileSize = await file.length();
+      final double fileSizeMB = fileSize / (1024 * 1024);
+
+      if (fileSizeMB > 2.0) {
+        if (!context.mounted) return;
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'De afbeelding is groter dan 2 MB. Selecteer een andere afbeelding.',
+            ),
+          ),
+        );
+        return;
+      }
+
+      Navigator.pop(context);
+
+      setState(() {
+        _imageFile = image;
+      });
+      ;
     }
   }
 }
